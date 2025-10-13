@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钓场管理 - 模拟数据预览</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        
+        .badge-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .badge-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="p-4">
+    <div class="max-w-7xl mx-auto">
+        <!-- 内容区 -->
+        <div>
+            <!-- 筛选搜索 -->
+            <div class="flex justify-between items-center gap-4 bg-white p-4 mb-4 rounded-lg shadow-sm">
+                <h1 class="text-2xl font-bold">钓场管理</h1>
+                <div class="flex space-x-2">
+                    <input type="text" placeholder="搜索钓场名称/地址" 
+                        class="border rounded px-3 py-2 w-60" value="">
+                    <select class="border rounded px-3 py-2">
+                        <option value="">全部状态</option>
+                        <option value="1">启用</option>
+                        <option value="0">禁用</option>
+                    </select>
+                    <button class="px-4 py-2 bg-black text-white rounded hover:bg-gray-800 flex items-center justify-center gap-2">
+                        <span>搜索</span>
+                    </button>
+                    <button class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+                        添加钓场
+                    </button>
+                </div>
+            </div>
+
+            <!-- 数据表格 -->
+            <div class="bg-white shadow-sm overflow-hidden rounded-lg">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm min-w-[1200px]">
+                        <thead class="bg-white">
+                            <tr>
+                                <th class="px-4 py-2 min-w-[80px]">ID</th>
+                                <th class="px-4 py-2 min-w-[200px]">钓场名称</th>
+                                <th class="px-4 py-2 min-w-[250px]">地址</th>
+                                <th class="px-4 py-2 min-w-[120px]">联系人</th>
+                                <th class="px-4 py-2 min-w-[120px]">联系电话</th>
+                                <th class="px-4 py-2 min-w-[100px]">状态</th>
+                                <th class="px-4 py-2 min-w-[150px]">创建时间</th>
+                                <th class="px-4 py-2 min-w-[150px]">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 模拟数据 -->
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="px-4 py-3">1</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center">
+                                        <img src="https://picsum.photos/id/10/200/200" alt="钓场图片" class="w-12 h-12 rounded mr-3 object-cover">
+                                        <span>青山水库</span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 truncate max-w-xs">浙江省杭州市临安区太湖源镇</td>
+                                <td class="px-4 py-3">张三</td>
+                                <td class="px-4 py-3">13800138001</td>
+                                <td class="px-4 py-3">
+                                    <span class="badge-success">启用</span>
+                                </td>
+                                <td class="px-4 py-3">2024-01-01 10:00:00</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <button class="px-3 py-1 bg-blue-500 text-white rounded font-medium hover:bg-blue-600">查看</button>
+                                        <button class="px-3 py-1 bg-yellow-500 text-white rounded font-medium hover:bg-yellow-600">编辑</button>
+                                        <button class="px-3 py-1 bg-red-500 text-white rounded font-medium hover:bg-red-600">删除</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="px-4 py-3">2</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center">
+                                        <img src="https://picsum.photos/id/13/200/200" alt="钓场图片" class="w-12 h-12 rounded mr-3 object-cover">
+                                        <span>西湖垂钓中心</span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 truncate max-w-xs">浙江省杭州市西湖区北山路</td>
+                                <td class="px-4 py-3">李四</td>
+                                <td class="px-4 py-3">13900139002</td>
+                                <td class="px-4 py-3">
+                                    <span class="badge-success">启用</span>
+                                </td>
+                                <td class="px-4 py-3">2024-01-02 14:30:00</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <button class="px-3 py-1 bg-blue-500 text-white rounded font-medium hover:bg-blue-600">查看</button>
+                                        <button class="px-3 py-1 bg-yellow-500 text-white rounded font-medium hover:bg-yellow-600">编辑</button>
+                                        <button class="px-3 py-1 bg-red-500 text-white rounded font-medium hover:bg-red-600">删除</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="px-4 py-3">3</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center">
+                                        <img src="https://picsum.photos/id/15/200/200" alt="钓场图片" class="w-12 h-12 rounded mr-3 object-cover">
+                                        <span>千岛湖钓鱼基地</span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 truncate max-w-xs">浙江省杭州市淳安县千岛湖镇</td>
+                                <td class="px-4 py-3">王五</td>
+                                <td class="px-4 py-3">13700137003</td>
+                                <td class="px-4 py-3">
+                                    <span class="badge-success">启用</span>
+                                </td>
+                                <td class="px-4 py-3">2024-01-03 09:15:00</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <button class="px-3 py-1 bg-blue-500 text-white rounded font-medium hover:bg-blue-600">查看</button>
+                                        <button class="px-3 py-1 bg-yellow-500 text-white rounded font-medium hover:bg-yellow-600">编辑</button>
+                                        <button class="px-3 py-1 bg-red-500 text-white rounded font-medium hover:bg-red-600">删除</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="px-4 py-3">4</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center">
+                                        <img src="https://picsum.photos/id/19/200/200" alt="钓场图片" class="w-12 h-12 rounded mr-3 object-cover">
+                                        <span>西溪湿地钓场</span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 truncate max-w-xs">浙江省杭州市西湖区西溪湿地公园</td>
+                                <td class="px-4 py-3">赵六</td>
+                                <td class="px-4 py-3">13600136004</td>
+                                <td class="px-4 py-3">
+                                    <span class="badge-danger">禁用</span>
+                                </td>
+                                <td class="px-4 py-3">2024-01-04 16:45:00</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <button class="px-3 py-1 bg-blue-500 text-white rounded font-medium hover:bg-blue-600">查看</button>
+                                        <button class="px-3 py-1 bg-yellow-500 text-white rounded font-medium hover:bg-yellow-600">编辑</button>
+                                        <button class="px-3 py-1 bg-red-500 text-white rounded font-medium hover:bg-red-600">删除</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr class="border-t hover:bg-gray-50">
+                                <td class="px-4 py-3">5</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center">
+                                        <img src="https://picsum.photos/id/21/200/200" alt="钓场图片" class="w-12 h-12 rounded mr-3 object-cover">
+                                        <span>钱塘江钓鱼码头</span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 truncate max-w-xs">浙江省杭州市滨江区钱塘江畔</td>
+                                <td class="px-4 py-3">钱七</td>
+                                <td class="px-4 py-3">13500135005</td>
+                                <td class="px-4 py-3">
+                                    <span class="badge-success">启用</span>
+                                </td>
+                                <td class="px-4 py-3">2024-01-05 11:20:00</td>
+                                <td class="px-4 py-3">
+                                    <div class="flex flex-wrap gap-2">
+                                        <button class="px-3 py-1 bg-blue-500 text-white rounded font-medium hover:bg-blue-600">查看</button>
+                                        <button class="px-3 py-1 bg-yellow-500 text-white rounded font-medium hover:bg-yellow-600">编辑</button>
+                                        <button class="px-3 py-1 bg-red-500 text-white rounded font-medium hover:bg-red-600">删除</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 分页 -->
+            <div class="flex justify-end items-center gap-2 py-4">
+                <span class="text-sm text-gray-600">共 5 条数据</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

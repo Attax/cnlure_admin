@@ -9,8 +9,3 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
-
-/* Alpine.js x-cloak样式，用于防止页面加载时元素闪烁 */
-[x-cloak] {
-    display: none !important;
-}

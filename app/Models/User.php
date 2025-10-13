@@ -2,47 +2,57 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    protected $table = 'user';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    // 主键
+    protected $primaryKey = 'id';
+
+    // 时间戳字段
+    public $timestamps = true;
+
+    // 可填充字段
     protected $fillable = [
         'name',
         'email',
         'password',
+        'type'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    // 定义隐藏字段
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    // 类型转换
+    protected $casts = [
+        'type' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
+
+    // 关联到钓场
+    public function fishingSpots()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(FishingSpot::class, 'user_id');
+    }
+
+    // 判断是否为企业用户
+    public function isEnterprise()
+    {
+        return $this->type === 1;
+    }
+
+    /**
+     * 自定义日期时间序列化格式
+     * 将时间戳从ISO 8601格式(Y-m-d\TH:i:s.000000Z)改为更易读的格式
+     */
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format('Y-m-d H:i:s');
     }
 }

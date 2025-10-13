@@ -1,0 +1,40 @@
+# git 在正式環境並不需要，而且經過多次 commit 的專案，.git 資料夾通常會很大，建議排除
+.git
+
+# IDE 相關設定
+.idea
+.vscode
+
+bootstrap/cache/*.php
+
+storage/app/*
+storage/debugbar/*
+storage/framework/*
+storage/logs/*
+
+# 前端依賴套件
+node_modules
+
+# 打包好的前端資源 (可以不排除，這裡會排除的原因是我會在建立過程中重新打包)
+public/build
+
+# 測試相關檔案的資料夾
+tests
+
+# 後端依賴套件 (可以不排除，這裡會排除的原因是我會在建立過程中重新下載)
+vendor
+
+# 其他
+.editorconfig
+.env
+.env.example
+.gitattributes
+.gitignore
+.phpunit.result.cache
+_ide_helper.php
+_ide_helper_models.php
+CHANGELOG.md
+docker-compose.yml
+phpunit.xml
+pint.json
+README.md
