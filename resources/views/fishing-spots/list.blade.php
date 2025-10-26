@@ -40,12 +40,11 @@
                         <th class="px-4 py-2 min-w-[80px]">ID</th>
                         <th class="px-4 py-2 min-w-[200px]">钓场名称</th>
                         <th class="px-4 py-2 min-w-[250px]">地址</th>
-                        <th class="px-4 py-2 min-w-[120px]">联系人</th>
                         <th class="px-4 py-2 min-w-[120px]">联系电话</th>
-                        <th class="px-4 py-2 min-w-[100px]">状态</th>
-                        <th class="px-4 py-2 min-w-[100px]">营业状态</th>
+                        <th class="px-4 py-2 min-w-[120px]">联系人</th>
                         <th class="px-4 py-2 min-w-[150px]">钓场主</th>
-                        <th class="px-4 py-2 min-w-[150px]">创建时间</th>
+                        <th class="px-4 py-2 min-w-[100px]">状态</th>
+                          <th class="px-4 py-2 min-w-[150px]">创建时间</th>
                         <th class="px-4 py-2 min-w-[150px]">操作</th>
                     </tr>
                 </thead>
@@ -62,24 +61,8 @@
                                 </div>
                             </td>
                             <td class="px-4 py-2 truncate max-w-xs" x-text="spot.address"></td>
-                            <td class="px-4 py-2" x-text="spot.contact_name"></td>
                             <td class="px-4 py-2" x-text="spot.contact_phone"></td>
-                            <td class="px-4 py-2">
-                                <template x-if="spot.status === 1">
-                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded font-medium">启用</span>
-                                </template>
-                                <template x-if="spot.status === 0">
-                                    <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded font-medium">禁用</span>
-                                </template>
-                            </td>
-                            <td class="px-4 py-2">
-                                <template x-if="spot.business_status === 1">
-                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded font-medium">营业中</span>
-                                </template>
-                                <template x-if="spot.business_status === 0">
-                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded font-medium">休息中</span>
-                                </template>
-                            </td>
+                            <td class="px-4 py-2" x-text="spot.contact_name"></td>
                             <td class="px-4 py-2">
                                 <template x-if="spot.user">
                                     <span class="text-blue-600" x-text="spot.user.name"></span>
@@ -88,6 +71,14 @@
                                     <span class="text-gray-500">未关联</span>
                                 </template>
                             </td>
+                            <td class="px-4 py-2">
+                                  <template x-if="spot.status === 1">
+                                      <span class="px-3 py-1 bg-green-100 text-green-800 rounded font-medium">启用</span>
+                                  </template>
+                                  <template x-if="spot.status === 0">
+                                      <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded font-medium">禁用</span>
+                                  </template>
+                              </td>
                             <td class="px-4 py-2" x-text="spot.created_at"></td>
                             <td class="px-4 py-2">
                                 <div class="flex flex-wrap gap-2">
@@ -122,6 +113,9 @@
                     <p><span class="text-gray-600">经纬度：</span><span x-text="currentSpot.latitude + ', ' + currentSpot.longitude"></span></p>
                     <p><span class="text-gray-600">联系人：</span><span x-text="currentSpot.contact_name"></span></p>
                     <p><span class="text-gray-600">联系电话：</span><span x-text="currentSpot.contact_phone"></span></p>
+                    <p><span class="text-gray-600">钓场面积：</span><span x-text="currentSpot.area || '-'"></span> 平方米</p>
+                    <p><span class="text-gray-600">水域类型：</span><span x-text="currentSpot.water_type === 0 ? '天然' : currentSpot.water_type === 1 ? '人工' : '-'" class="px-2 py-1 rounded-full text-sm font-medium"></span></p>
+                    <p><span class="text-gray-600">水质类型：</span><span x-text="currentSpot.water_quality === 0 ? '淡水' : currentSpot.water_quality === 1 ? '海水' : currentSpot.water_quality === 2 ? '咸淡水' : '-'" class="px-2 py-1 rounded-full text-sm font-medium"></span></p>
                     <p><span class="text-gray-600">状态：</span><span x-text="currentSpot.status === 1 ? '启用' : '禁用'"></span></p>
                     <p><span class="text-gray-600">营业状态：</span>
                         <template x-if="currentSpot.business_status === 1">
@@ -226,6 +220,27 @@
                     <div class="md:col-span-2">
                         <label class="block text-sm font-medium text-gray-700 mb-1">地址 <span class="text-red-500">*</span></label>
                         <input type="text" x-model="formData.address" required class="border rounded w-full px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">钓场面积（平方米）</label>
+                        <input type="number" min="0" step="0.01" x-model="formData.area" class="border rounded w-full px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">水域类型</label>
+                        <select x-model="formData.water_type" class="border rounded w-full px-3 py-2">
+                            <option value="">请选择</option>
+                            <option value="0">天然</option>
+                            <option value="1">人工</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">水质类型</label>
+                        <select x-model="formData.water_quality" class="border rounded w-full px-3 py-2">
+                            <option value="">请选择</option>
+                            <option value="0">淡水</option>
+                            <option value="1">海水</option>
+                            <option value="2">咸淡水</option>
+                        </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">纬度</label>
@@ -353,7 +368,10 @@
                 price_description: '',
                 facilities: [],
                 fish_species: [],
-                image_urls: []
+                image_urls: [],
+                area: '',
+                water_type: '',
+                water_quality: ''
             },
             formData: {
                 name: '',
@@ -369,7 +387,10 @@
                 status: 1,
                 business_status: 1,
                 user_id: '',
-                image_urls: []
+                image_urls: [],
+                area: '',
+                water_type: '',
+                water_quality: ''
             },
 
             // 筛选相关
@@ -460,7 +481,10 @@
                             name: '北京钓鱼协会'
                         },
                         created_at: '2024-01-01 10:00:00',
-                        image_urls: ['https://picsum.photos/id/10/400/300', 'https://picsum.photos/id/11/400/300']
+                        image_urls: ['https://picsum.photos/id/10/400/300', 'https://picsum.photos/id/11/400/300'],
+                        area: 15000,
+                        water_type: 0,
+                        water_quality: 0
                     },
                     {
                         id: 2,
@@ -482,7 +506,10 @@
                             name: '上海垂钓俱乐部'
                         },
                         created_at: '2024-01-02 14:30:00',
-                        image_urls: ['https://picsum.photos/id/13/400/300']
+                        image_urls: ['https://picsum.photos/id/13/400/300'],
+                        area: 8000,
+                        water_type: 0,
+                        water_quality: 0
                     },
                     {
                         id: 3,
@@ -501,7 +528,10 @@
                         user_id: null,
                         user: null,
                         created_at: '2024-01-03 09:15:00',
-                        image_urls: ['https://picsum.photos/id/15/400/300', 'https://picsum.photos/id/16/400/300', 'https://picsum.photos/id/17/400/300']
+                        image_urls: ['https://picsum.photos/id/15/400/300', 'https://picsum.photos/id/16/400/300', 'https://picsum.photos/id/17/400/300'],
+                        area: 50000,
+                        water_type: 0,
+                        water_quality: 0
                     },
                     {
                         id: 4,
@@ -523,7 +553,10 @@
                             name: '广州渔乐圈企业'
                         },
                         created_at: '2024-01-04 16:45:00',
-                        image_urls: ['https://picsum.photos/id/19/400/300']
+                        image_urls: ['https://picsum.photos/id/19/400/300'],
+                        area: 12000,
+                        water_type: 0,
+                        water_quality: 0
                     },
                     {
                         id: 5,
@@ -542,7 +575,10 @@
                         user_id: null,
                         user: null,
                         created_at: '2024-01-05 11:20:00',
-                        image_urls: ['https://picsum.photos/id/21/400/300', 'https://picsum.photos/id/22/400/300']
+                        image_urls: ['https://picsum.photos/id/21/400/300', 'https://picsum.photos/id/22/400/300'],
+                        area: 20000,
+                        water_type: 0,
+                        water_quality: 2
                     }
                 ];
 
@@ -618,7 +654,10 @@
                     status: 1,
                     business_status: 1,
                     user_id: '',
-                    image_urls: []
+                    image_urls: [],
+                    area: '',
+                    water_type: '',
+                    water_quality: ''
                 };
                 this.showEditModal = true;
                 document.querySelector('[x-show="showEditModal"]').classList.remove('hidden');
@@ -679,7 +718,10 @@
                     status: spot.status,
                     business_status: spot.business_status || 1,
                     user_id: spot.user_id || '',
-                    image_urls: [...(spot.image_urls || [])] // 复制现有图片URL数组
+                    image_urls: [...(spot.image_urls || [])], // 复制现有图片URL数组
+                    area: spot.area || '',
+                    water_type: spot.water_type || '',
+                    water_quality: spot.water_quality || ''
                 };
                 this.showEditModal = true;
                 document.querySelector('[x-show="showEditModal"]').classList.remove('hidden');

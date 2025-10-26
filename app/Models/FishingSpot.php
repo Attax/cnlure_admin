@@ -16,6 +16,9 @@ class FishingSpot extends Model
         'contact_phone',
         'opening_hours',
         'price',
+        'area',
+        'water_type',
+        'water_quality',
         'status',
         'business_status',
         'image_urls',
@@ -30,6 +33,8 @@ class FishingSpot extends Model
         'fish_species' => 'array',
         'status' => 'integer',
         'business_status' => 'integer',
+        'water_type' => 'integer',
+        'water_quality' => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];

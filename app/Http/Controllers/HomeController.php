@@ -25,15 +25,15 @@ class HomeController extends Controller
         $postsTaskCount = Post::whereIn('audit_status', [0, -1])->count();
         // 获取待审核评论数量
         $commentsTaskCount = Comment::whereIn('audit_status', [0, -1])->count();
-        // 获取用户数量
-        $userCount = User::count();
+        // 获取正式用户数量（ID>=100001）
+        $userCount = User::where('id', '>=', 100001)->count();
 
         // 获取钓场数量
         //$fishingSpotCount = FishingSpot::count();
 
 
-        // 获取新增用户数量
-        $newUsersCount = User::where('created_at', '>=', now()->subMonth())->count();
+        // 获取新增正式用户数量（ID>=100001）
+        $newUsersCount = User::where('id', '>=', 100001)->where('created_at', '>=', now()->subMonth())->count();
 
         // 获取新增帖子数量
         $newPostsCount = Post::where('created_at', '>=', now()->subMonth())->count();

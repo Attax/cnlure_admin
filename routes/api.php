@@ -43,6 +43,9 @@ Route::prefix('users')->group(function () {
     Route::put('/{id}/verify', [AccountController::class, 'updateVerifyInfo']);
 });
 
+// 用户封禁历史接口
+Route::get('/users/{userId}/status-history', [UserController::class, 'getStatusHistory']);
+
 // 帖子相关接口
 Route::prefix('posts')->group(function () {
     // 帖子列表

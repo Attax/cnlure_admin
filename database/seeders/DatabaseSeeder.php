@@ -15,9 +15,13 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // 创建单个测试用户
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        
+        // 生成10万个用户ID
+        $this->call(UserSeeder::class);
     }
 }

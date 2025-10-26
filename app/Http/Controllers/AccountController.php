@@ -143,8 +143,8 @@ class AccountController extends Controller
                 ]);
             }
 
-            // 禁用用户
-            $user->status = 0;
+            // 禁用用户（设置为-1表示封禁）
+            $user->status = -1;
             $user->save();
 
             return response()->json([

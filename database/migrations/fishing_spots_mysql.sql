@@ -1,0 +1,27 @@
+-- MySQL 8.0 创建fishing_spots表的SQL语句
+CREATE TABLE `fishing_spots` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '钓场名称',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '地址',
+  `latitude` decimal(10,8) DEFAULT NULL COMMENT '纬度',
+  `longitude` decimal(11,8) DEFAULT NULL COMMENT '经度',
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '描述',
+  `contact_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '联系人姓名',
+  `contact_phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '联系电话',
+  `opening_hours` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '营业时间',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '价格',
+  `area` decimal(10,2) DEFAULT NULL COMMENT '钓场面积（平方米）',
+  `water_type` tinyint DEFAULT NULL COMMENT '水域类型：0-天然水域，1-人工水域',
+  `water_quality` tinyint DEFAULT NULL COMMENT '水质类型：0-淡水，1-海水，2-咸淡水',
+  `status` tinyint NOT NULL DEFAULT 0 COMMENT '状态：0-待审核，1-已审核，2-已拒绝',
+  `business_status` tinyint NOT NULL DEFAULT 1 COMMENT '营业状态：0-休息，1-营业',
+  `image_urls` json DEFAULT NULL COMMENT '图片URLs数组',
+  `facilities` json DEFAULT NULL COMMENT '设施数组',
+  `fish_species` json DEFAULT NULL COMMENT '鱼类品种数组',
+  `user_id` bigint unsigned NOT NULL COMMENT '关联用户ID',
+  `created_at` datetime(3) DEFAULT NULL COMMENT '创建时间',
+  `updated_at` datetime(3) DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `idx_user_id` (`user_id`) USING BTREE,
+  CONSTRAINT `fk_fishing_spots_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='钓场信息表';

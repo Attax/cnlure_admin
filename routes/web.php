@@ -30,6 +30,8 @@ Route::get('/login', function () {
 // 用户管理
 Route::prefix('users')->group(function () {
     Route::get('', [UserController::class, 'list']);
+    // 获取用户状态变更历史
+    Route::get('/{userId}/status-history', [UserController::class, 'getStatusHistory'])->name('users.status-history');
 });
 
 
