@@ -289,9 +289,35 @@ class UserController extends Controller
         // 使用Laravel的HTTP客户端调用踢下线接口
         try {
 
-            return Http::timeout(5)->post($url, [
-                'user_id' => $userId
-            ]);
+            // 生成sign
+            $timestamp = time();
+            $nonce = uniqid();
+            $token = env('SYSTEM_INTERNAL_TOKEN');
+            if (!$token) {
+                throw new \Exception('SYSTEM_INTERNAL_TOKEN 未配置');
+            }
+
+            $data = [
+                $timestamp,
+                $nonce,
+                $token
+            ];
+
+            // 将token、timestamp、nonce三个参数进行字典序排序
+            ksort($data);
+            // 拼接字符串
+            $rawText = join('', $data);
+
+            $signature = hash('sha1', $rawText);
+
+            return Http::timeout(5)
+                ->withHeaders([
+                    'X-Signature' => $signature,
+                    'X-Timestamp' => $timestamp,
+                    'X-Nonce' => $nonce,
+                ])->post($url, [
+                    'user_id' => $userId
+                ]);
         } catch (\Exception $e) {
             // 记录错误但不影响踢下线操作
             \Log::error('踢下线请求失败: ' . $e->getMessage() . ', URL: ' . $url);
